@@ -1,0 +1,40 @@
+<div
+    class="control__container"
+    [ngClass]="{
+        'control__container--stacked': true
+    }"
+>
+    <div class="control__label">
+        <div class="label-wrapper" [class.label-wrapper-stacked]="true">
+            <ion-label class="label-text">
+                {{ label }}
+            </ion-label>
+        </div>
+    </div>
+    <div class="control">
+        <div class="item-container">
+            <ion-item class="value-input">
+                <ion-input
+                    autocapitalize="sentences"
+                    type="text"
+                    [inputmode]="inputMode"
+                    (ionInput)="onInputChange($event)"
+                    class="item-input"
+                    [placeholder]="placeholder"
+                    #ionInputEl
+                    [disabled]="disabled"
+                    [value]="value"
+                    (ionFocus)="onInputFocus($event)"
+                    (ionBlur)="onInputBlur($event)"
+                    [maxlength]="maxLength"
+                ></ion-input>
+                <ion-icon
+                    *ngIf="enableClearInput"
+                    class="x-button"
+                    name="close-outline"
+                    (click)="clearInput()"
+                ></ion-icon>
+            </ion-item>
+        </div>
+    </div>
+</div>

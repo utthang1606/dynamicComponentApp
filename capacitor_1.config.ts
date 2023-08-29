@@ -1,12 +1,9 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
+  appId: 'tan.test.ionic.starter.test',
   appName: 'dynamicComponentApp',
-  webDir: 'www',
-  server: {
-    androidScheme: 'https'
-  }
+  webDir: 'www'
 };
 
 export default config;

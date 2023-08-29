@@ -1,5 +1,5 @@
 {
-  "name": "myApp",
+  "name": "dynamicComponentApp",
   "integrations": {
     "capacitor": {}
   },
