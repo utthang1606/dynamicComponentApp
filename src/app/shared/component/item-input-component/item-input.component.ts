@@ -8,7 +8,7 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import { IonInput } from '@ionic/angular';
 
 @Component({
@@ -19,7 +19,10 @@ import { IonInput } from '@ionic/angular';
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ItemInputComponent), multi: true }]
 })
 export class ItemInputComponent implements ControlValueAccessor {
-    // @ts-ignore
+  // @ts-ignore
+  @Input() control: FormControl;
+
+  // @ts-ignore
   @Input() public label: string;
     @Input() public displayStackedLabel = false;
   // @ts-ignore

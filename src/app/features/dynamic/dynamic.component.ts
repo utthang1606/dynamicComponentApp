@@ -25,7 +25,7 @@ import {IonInput} from "@ionic/angular";
 })
 export class DynamicComponent {
   // @ts-ignore
-  @Input() child: string;
+  @Input() child: any;
   // @ts-ignore
   @Input() value: string;
 
@@ -40,11 +40,11 @@ export class DynamicComponent {
 
 
   //Child components
-  private children = [
+  public children = [
     {
       component: Child1Component,
       value: 'child 1',
-      formControlName: ''
+      formControlName: 'test'
     },
     {
       component: IonInput,
@@ -76,7 +76,7 @@ export class DynamicComponent {
 
     const formGroupFields = this.getFormControlsFields();
     this.testUser = new FormControl('mmm');
-    formGroupFields['testUser'] = new FormControl('');
+    formGroupFields['testUser'] = new FormControl('mmm');
     this.testUserForm = new FormGroup(formGroupFields);
     this.trackFormChangeEvent();
   }
@@ -96,19 +96,24 @@ export class DynamicComponent {
   ngAfterViewInit() {
     // @ts-ignore
     // let childComponent = this.children[this.child || 'child1'];
+
     //Resolve child component
     this.children.forEach((item) => {
 
-      // const ngControl = this.injector.get(NgControl);
       // @ts-ignore
-      this.componentRef = this.target.createComponent(item.component);
-      if (this.componentRef) {
-        // this.componentRef.instance.value = this.testUserForm.controls[item.formControlName].value;
-        this.componentRef.instance.label = item.label;
-        console.log('form control: ', this.testUserForm.controls[item.formControlName]);
-        this.componentRef.instance.formControl = this.testUser;
-        this.componentRef.instance.formControlName = this.testUserForm.controls[item.formControlName];
-      }
+      console.log('component: ', item.component);
+    //   this.componentRef = this.target.createComponent(item.component);
+    //   if (this.componentRef) {
+    //     // this.componentRef.instance.value = this.testUserForm.controls[item.formControlName].value;
+    //     this.componentRef.instance.label = item.label;
+    //     console.log('form control: ', this.testUserForm.controls[item.formControlName]);
+    //     console.log('this.componentRef.instance: ', this.componentRef.instance);
+    //     this.componentRef.instance.control = this.testUserForm.controls[item.formControlName];
+    //     // this.componentRef.instance.formControl = this.testUserForm.controls[item.formControlName];
+    //     // this.componentRef.instance['formControlName']= item.formControlName;
+    //     // this.componentRef.instance['formControlName']= this.testUserForm.controls[item.formControlName];//item.formControlName;
+    //
+    //   }
     });
   }
 

@@ -1,7 +1,17 @@
 <ion-content class="main-container">
   <p>Parent component</p>
-  <form [formGroup]="testUserForm">
-    <ion-item><ion-input [formControl]="testUser" /></ion-item>
-    <div #target></div>
+  <form [formGroup]="testUserForm" *ngIf="testUserForm">
+    <ion-item><ion-input formControlName="testUser" /></ion-item>
+<!--    <div #target></div>-->
+    <div *ngFor="let item of children">
+      <app-dynamic-item
+        *ngIf="testUserForm.controls[item.formControlName]"
+        [child]="item.component"
+        [label]="item.label"
+        [control]="testUserForm.controls[item.formControlName]"
+      >
+<!--        formControlName="testUser" [control]="testUserForm.controls[item.formControlName]"-->
+      </app-dynamic-item>
+    </div>
   </form>
 </ion-content>
