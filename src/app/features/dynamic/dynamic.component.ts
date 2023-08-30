@@ -14,29 +14,18 @@ import {IonInput} from "@ionic/angular";
 @Component({
   selector: 'app-parent',
   templateUrl: './dynamic.component.html',
-  styleUrls: ['./dynamic.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DynamicComponent),
-      multi: true,
-    },
-  ],
+  styleUrls: ['./dynamic.component.scss']
 })
 export class DynamicComponent {
-  // @ts-ignore
   @Input() child: any;
-  // @ts-ignore
   @Input() value: string;
 
   public testUser: FormControl;
   public testUserForm: FormGroup;
 
   //Get tag child component will be placed
-  // @ts-ignore
-  @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
-  // @ts-ignore
-  private componentRef: ComponentRef<any>;
+  // @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
+  // private componentRef: ComponentRef<any>;
 
 
   //Child components
@@ -61,15 +50,9 @@ export class DynamicComponent {
   ];
 
   constructor(
-    private viewContainerRef: ViewContainerRef,
     public fb: FormBuilder,
     public injector: Injector
   ) {
-  }
-
-  //Pass through value to child component
-  renderComponent() {
-    if (this.componentRef) this.componentRef.instance.value = this.value;
   }
 
   public async ngOnInit(): Promise<void> {
@@ -98,10 +81,10 @@ export class DynamicComponent {
     // let childComponent = this.children[this.child || 'child1'];
 
     //Resolve child component
-    this.children.forEach((item) => {
-
-      // @ts-ignore
-      console.log('component: ', item.component);
+    // this.children.forEach((item) => {
+    //
+    //   // @ts-ignore
+    //   console.log('component: ', item.component);
     //   this.componentRef = this.target.createComponent(item.component);
     //   if (this.componentRef) {
     //     // this.componentRef.instance.value = this.testUserForm.controls[item.formControlName].value;
@@ -114,7 +97,7 @@ export class DynamicComponent {
     //     // this.componentRef.instance['formControlName']= this.testUserForm.controls[item.formControlName];//item.formControlName;
     //
     //   }
-    });
+    // });
   }
 
   public trackFormChangeEvent(): void {
@@ -123,8 +106,4 @@ export class DynamicComponent {
     });
   }
 
-  //Pass through value to child component when value changes
-  ngOnChanges(changes: Object) {
-    this.renderComponent();
-  }
 }

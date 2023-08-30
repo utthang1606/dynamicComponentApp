@@ -1,32 +1,22 @@
-import {Component, ComponentRef, forwardRef, Input, ViewChild, ViewContainerRef} from '@angular/core';
-import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Component, ComponentRef, Input, ViewChild, ViewContainerRef} from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-item',
   templateUrl: './dynamic-field.component.html',
-  styleUrls: ['./dynamic-field.component.scss'],
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DynamicFieldComponent), multi: true }]
+  styleUrls: ['./dynamic-field.component.scss']
 })
-export class DynamicFieldComponent implements ControlValueAccessor {
+export class DynamicFieldComponent {
 
-  // @ts-ignore
   @Input() child: any;
-  // @ts-ignore
   @Input() label: string;
-  // @ts-ignore
   @Input() control: any;
 
-  @Input() public value: any = '';
-
-
   //Get tag child component will be placed
-  // @ts-ignore
   @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
-  // @ts-ignore
+
   private componentRef: ComponentRef<any>;
 
   constructor(
-    private viewContainerRef: ViewContainerRef,
   ){}
 
   //Compile child component
@@ -36,17 +26,6 @@ export class DynamicFieldComponent implements ControlValueAccessor {
     if (this.componentRef) {
       this.componentRef.instance.control = this.control;
       this.componentRef.instance.label = this.label;
-    }
-  }
-  registerOnChange(fn: any): void {
-  }
-
-  registerOnTouched(fn: any): void {
-  }
-
-  writeValue(value: any): void {
-    if (value !== undefined) {
-      this.value = value;
     }
   }
 
