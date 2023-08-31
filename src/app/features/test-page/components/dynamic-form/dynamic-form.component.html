@@ -1,0 +1,13 @@
+<div *ngFor="let section of config">
+  <div class="section" [id]="section.section"></div>
+  <h1>{{ section.title }}</h1>
+  <div>
+    <ng-container
+      *ngFor="let field of section.fields"
+      dynamicField
+      [group]="formGroup.get(section.sectionName)"
+      [config]="field"
+    >
+    </ng-container>
+  </div>
+</div>

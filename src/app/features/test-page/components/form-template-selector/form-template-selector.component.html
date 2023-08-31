@@ -1,0 +1,44 @@
+<div>
+  <div class="select-wrapper" *ngIf="!selectedValue && !disabled">
+    <div *ngFor="let item of items">
+      <div class="select-item">
+        <div (click)="updateValue(item.value)" class="select-text-wrap">
+          <div class="text-select">
+            {{ item?.label }}
+          </div>
+          <div *ngIf="selectedValue">X</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!selectedValue && disabled">
+    <div class="no-selected">
+      {{ "general.meassage.noselection" }}
+    </div>
+  </div>
+
+  <div
+    *ngIf="selectedValue"
+    class="value-wrapper {{ 'template-level-' + level }}"
+  >
+    <div class="selected-value-wrap">
+      <div class="select-label-wrap">
+        <div class="icon-lable" (click)="removeSection()" *ngIf="!disabled">
+          X
+        </div>
+        <div class="text-label">{{ selectedValue?.label }}</div>
+      </div>
+      <div
+        *ngIf="selectedValue?.subLabel"
+        class="subheader"
+        [ngClass]="{ 'text-align': !disabled }"
+      >
+        {{ selectedValue?.subLabel }}
+      </div>
+    </div>
+
+    <div class="template-wrapper" *ngIf="selectedValue && templateConfig">
+      <app-dynamic-form [config]="templateConfig"></app-dynamic-form>
+    </div>
+  </div>
+</div>
